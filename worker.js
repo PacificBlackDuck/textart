@@ -29,7 +29,7 @@ function makeArt(imgData, threshold, dither, invert, trim){
             var pixel1 = bwArray[i + j];
             var pixel2 = bwArray[i + j + imgData.width];
             if (pixel2 == undefined) {
-                pixel2 = true ^ invert;
+                pixel2 = false ^ invert;
             }
             if (pixel1 && pixel2) {
                 result += " ";
