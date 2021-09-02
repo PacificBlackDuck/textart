@@ -29,7 +29,7 @@ function makeArt(imgData, threshold, dither, invert, trim){
             var pixel1 = bwArray[i + j];
             var pixel2 = bwArray[i + j + imgData.width];
             if (pixel2 == undefined) {
-                pixel2 = false ^ invert;
+                pixel2 = pixel1;
             }
             if (pixel1 && pixel2) {
                 result += " ";
@@ -47,10 +47,50 @@ function makeArt(imgData, threshold, dither, invert, trim){
     }
 
     if (trim) {
-        result = result.replace(/ *$/gm, "");
+        result = trimLeft(result);
+        result = trimRight(result);
     }
 
     return result;
+}
+
+function trimLeft(text){
+    var lines = text.split("\n");
+    var linecount = lines.length;
+    var smallest;
+
+    for (var i = 0; i < linecount; i++) {
+        var chars = Array.from(lines[i]);
+        var charcount = chars.length;
+
+        var counter = 0;
+
+        for (var j = 0; j < charcount; j++) {
+            if (chars[j] == " "){
+                counter++;
+            } else {
+                if (smallest == undefined) {
+                    smallest = counter;
+                } else if (counter < smallest) {
+                    smallest = counter;
+                }
+                break;
+            }
+        }
+
+    }
+
+    if (smallest == undefined) {return text};
+
+    for (var i = 0; i < linecount; i++) {
+        lines[i] = lines[i].substr(smallest);
+    }
+
+    return lines.join("\n");
+}
+
+function trimRight(text){
+    return text.replace(/ *$/gm, "");
 }
 
 function dither_atkinson(image, imageWidth, threshold) {
