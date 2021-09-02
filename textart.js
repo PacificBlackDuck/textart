@@ -14,6 +14,7 @@ function handleImage(e) {
 document.getElementById("imageLoader").addEventListener("change", handleImage, false);
 var threshold = document.getElementById("threshold");
 var width = document.getElementById("width");
+var trim = document.getElementById("trim");
 var dither = document.getElementById("dither");
 var invert = document.getElementById("invert");
 
@@ -22,6 +23,8 @@ width.addEventListener("input", drawPicture);
 
 threshold.addEventListener("change", generateTextArt);
 threshold.addEventListener("input", generateTextArt);
+
+trim.addEventListener("change", generateTextArt);
 
 dither.addEventListener("change", generateTextArt);
 
@@ -66,7 +69,7 @@ function generateTextArt() {
     var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
     
     if (!working) {
-        worker.postMessage([imgData, threshold.value, dither.checked, invert.checked]);
+        worker.postMessage([imgData, threshold.value, dither.checked, invert.checked, trim.checked]);
         working = true;
     } else {
         workPending = true;

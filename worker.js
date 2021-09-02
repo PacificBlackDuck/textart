@@ -2,11 +2,11 @@
 addEventListener("message", msg);
 
 function msg(e){
-    postMessage(makeArt(e.data[0], e.data[1], e.data[2], e.data[3]));
+    postMessage(makeArt(e.data[0], e.data[1], e.data[2], e.data[3], e.data[4]));
 }
 
 
-function makeArt(imgData, threshold, dither, invert){
+function makeArt(imgData, threshold, dither, invert, trim){
     var i = 0;
     var bwArray = [];
     var length = imgData.width * imgData.height * 4;
@@ -44,6 +44,10 @@ function makeArt(imgData, threshold, dither, invert){
 
         result += "\n";
         i += imgData.width * 2;
+    }
+
+    if (trim) {
+        result = result.replace(/ *$/gm, "");
     }
 
     return result;
