@@ -49,6 +49,7 @@ function makeArt(imgData, threshold, dither, invert, trim){
     if (trim) {
         result = trimLeft(result);
         result = trimRight(result);
+        result = trimUpAndDown(result);
     }
 
     return result;
@@ -91,6 +92,10 @@ function trimLeft(text){
 
 function trimRight(text){
     return text.replace(/ *$/gm, "");
+}
+
+function trimUpAndDown(text){
+    return text.replace(/^\n*|\n*$/g, "");
 }
 
 function dither_atkinson(image, imageWidth, threshold) {
