@@ -55,12 +55,13 @@ function workerMsg(e){
 }
 
 function drawPicture() {
-    context.fillStyle = "#FFFFFF";
     canvas.width = (width.value >= 1) ? width.value : 1;
     canvas.height = (width.value >= 1) ? Math.round(width.value * (img.height / img.width)) : 1;
     context.imageSmoothingEnabled = false;
+    context.fillStyle = "#FFFFFF";
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.drawImage(img, 0, 0, canvas.width, canvas.height);
+    console.log(canvas.toDataURL());
     generateTextArt();
 }
 
