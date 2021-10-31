@@ -2,3 +2,14 @@ textarea{
     font-family: 'Courier New', monospace;
     font-size: 12px;
 }
+
+canvas {
+    width:200px;
+    image-rendering: pixelated;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

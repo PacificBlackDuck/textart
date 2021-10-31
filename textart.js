@@ -31,7 +31,7 @@ dither.addEventListener("change", generateTextArt);
 invert.addEventListener("change", generateTextArt);
 
 var textarea = document.getElementById("textarea");
-var canvas = document.createElement("canvas");
+var canvas = document.getElementById("canvas");
 var context = canvas.getContext("2d", {
     alpha: false
 });
@@ -61,7 +61,6 @@ function drawPicture() {
     context.fillStyle = "#FFFFFF";
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.drawImage(img, 0, 0, canvas.width, canvas.height);
-    console.log(canvas.toDataURL());
     generateTextArt();
 }
 
